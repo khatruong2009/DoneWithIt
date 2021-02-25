@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
-import { StyleSheet, Text, View, Button, SafeAreaView, Image, TextInput, TouchableWithoutFeedback, Keyboard, Picker } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { StyleSheet, Text, Button, SafeAreaView, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 export default function App() {
 
@@ -8,14 +8,28 @@ export default function App() {
   const [tip, setTip] = useState(0);
   const [people, setPeople] = useState(0);
 
-  const [resultTip, setResultTip] = useState();
+  const [resultTip, setResultTip] = useState(0);
+  const [resultTotal, setResultTotal] = useState(0);
+  const [resultPerson, setResultPerson] = useState(0);
 
-  let resultTotal = 0;
-  let resultPerson = 0;
+  const [hidden, setHidden] = useState(true);
 
+  // handle calculations
   const handlePress = () => {
-    setResultTip(bill * (tip/100));
-    console.log(resultTip);
+    setResultTip(bill * (tip / 100));
+    setResultTotal(parseFloat(bill) + parseFloat(resultTip));
+    setResultPerson(resultTotal / people);
+
+    alert(resultTotal);
+
+    setHidden(false);
+  }
+
+  // TEST
+  const [test, setTest] = useState(0);
+
+  const testPress = () => {
+    setTest(test + 1);
   }
 
   return (
@@ -24,15 +38,12 @@ export default function App() {
       {/* main container */}
       <SafeAreaView style={styles.container}>
 
-        <Image source={{width: 200, height: 200, uri: "https://picsum.photos/id/1025/200/300"}}></Image>
-
-        <Text style={{fontWeight: "bold", fontSize: 30}} maxFontSizeMultiplier={2}>Tip Calculator</Text>
+        <Text style={{fontWeight: "bold", fontSize: 30, marginBottom: 35}} maxFontSizeMultiplier={2}>Tip Calculator</Text>
 
         {/* Input Bill Amount */}
         <Text style={styles.inputHeader}>Full Bill Amount: </Text>
 
         <TextInput 
-          type={"number"} 
           style={styles.input} 
           keyboardType={'decimal-pad'} 
           onChangeText={(number) => {setBill(number)}}>  
@@ -42,7 +53,6 @@ export default function App() {
         <Text style={styles.inputHeader}>Tip Percentage: </Text>
 
         <TextInput 
-          type={"number"} 
           style={styles.input} 
           keyboardType={'decimal-pad'} 
           onChangeText={(percent) => {setTip(percent)}}>  
@@ -52,15 +62,17 @@ export default function App() {
         <Text style={styles.inputHeader}>Number of People: </Text>
 
         <TextInput 
-          type={"number"} 
           style={styles.input} 
           keyboardType={'decimal-pad'} 
           onChangeText={(number) => {setPeople(number)}}>  
         </TextInput>
 
-        <Text>{resultTip}</Text>
+        <Text style={{display: hidden? "none" : "flex"}}>The total bill is ${resultTotal}.</Text>
+        <Text style={{display: hidden? "none" : "flex"}}>The cost per person is ${resultPerson}.</Text>
 
         <Button onPress={handlePress} title="Calculate"></Button>
+        <Button onPress={testPress} title="Test Increase"></Button>
+        <Text>{test}</Text>
 
         <StatusBar style="auto" />
 
@@ -76,7 +88,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 75,
   },
   inputHeader: {
     paddingTop: 15,
