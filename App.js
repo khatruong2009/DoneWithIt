@@ -12,20 +12,19 @@ export default function App() {
 
   const [hidden, setHidden] = useState(true);
 
+  var calcTip, calcTotalBill, calcPerson;
+
   // handle calculations
   const handlePress = (bill, tip, people) => {
-    setResultTip(bill * (tip / 100));
-    setResultTotal(bill);
-    setResultPerson(people);
+
+    calcTip = bill * ( tip / 100);
+    calcTotalBill = calcTip + bill;
+    calcPerson = calcTotalBill / people;
+
+    setResultTotal(calcTotalBill);
+    setResultPerson(calcPerson);
 
     setHidden(false);
-  }
-  
-  // TEST
-  const [test, setTest] = useState(0);
-
-  const testPress = () => {
-    setTest(test + 1);
   }
 
   return (
@@ -34,9 +33,9 @@ export default function App() {
       {/* main container */}
       <SafeAreaView style={styles.container}>
 
-        <TipInput calculate={handlePress} testPress={testPress} />  
+        <TipInput calculate={handlePress} />  
         
-        <TipOutput test={test} hidden={hidden} total={resultTotal} person={resultPerson} />
+        <TipOutput hidden={hidden} total={resultTotal} person={resultPerson} />
 
         <StatusBar style="auto" />
 

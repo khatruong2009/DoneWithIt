@@ -7,7 +7,7 @@ export default function TipInput(props) {
   const [tip, setTip] = useState(0);
   const [people, setPeople] = useState(0);
 
-  const handlePress = (bill, tip, people) => {
+  const handlePress = () => {
     props.calculate(parseFloat(bill), parseFloat(tip), parseInt(people));
   };
 
@@ -44,7 +44,6 @@ export default function TipInput(props) {
       </TextInput>
 
       <Button onPress={handlePress} title="Calculate"></Button>
-      <Button onPress={props.testPress} title="Test Increase"></Button>
 
     </View>
     
