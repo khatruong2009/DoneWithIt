@@ -6,7 +6,6 @@ import TipOutput from "./components/tipOutput";
 
 export default function App() {
 
-  const [resultTip, setResultTip] = useState(0);
   const [resultTotal, setResultTotal] = useState(0);
   const [resultPerson, setResultPerson] = useState(0);
 
@@ -21,10 +20,17 @@ export default function App() {
     calcTotalBill = calcTip + bill;
     calcPerson = calcTotalBill / people;
 
-    setResultTotal(calcTotalBill);
-    setResultPerson(calcPerson);
+    setResultTotal(calcTotalBill.toFixed(2));
+    setResultPerson(calcPerson.toFixed(2));
 
     setHidden(false);
+  }
+
+  const appReset = () => {
+    setHidden(true);
+
+    setResultPerson(0);
+    setResultTotal(0);
   }
 
   return (
@@ -33,7 +39,7 @@ export default function App() {
       {/* main container */}
       <SafeAreaView style={styles.container}>
 
-        <TipInput calculate={handlePress} />  
+        <TipInput appReset={appReset} calculate={handlePress} />  
         
         <TipOutput hidden={hidden} total={resultTotal} person={resultPerson} />
 

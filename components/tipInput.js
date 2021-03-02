@@ -11,6 +11,14 @@ export default function TipInput(props) {
     props.calculate(parseFloat(bill), parseFloat(tip), parseInt(people));
   };
 
+  const reset = () => {
+    props.appReset();
+
+    setBill(0);
+    setTip(0);
+    setPeople(0);
+  }
+
   return (
     <View style={styles.container}>
 
@@ -20,6 +28,7 @@ export default function TipInput(props) {
       <Text style={styles.inputHeader}>Full Bill Amount: </Text>
 
       <TextInput 
+        value={bill}
         style={styles.input} 
         keyboardType={'decimal-pad'} 
         onChangeText={(number) => {setBill(number)}}>  
@@ -29,6 +38,7 @@ export default function TipInput(props) {
       <Text style={styles.inputHeader}>Tip Percentage: </Text>
 
       <TextInput 
+        value={tip}
         style={styles.input} 
         keyboardType={'decimal-pad'} 
         onChangeText={(percent) => {setTip(percent)}}>  
@@ -38,12 +48,15 @@ export default function TipInput(props) {
       <Text style={styles.inputHeader}>Number of People: </Text>
 
       <TextInput 
+        value={people}
         style={styles.input} 
         keyboardType={'decimal-pad'} 
         onChangeText={(number) => {setPeople(number)}}>  
       </TextInput>
 
       <Button onPress={handlePress} title="Calculate"></Button>
+
+      <Button onPress={reset} title="Reset"></Button>
 
     </View>
     
