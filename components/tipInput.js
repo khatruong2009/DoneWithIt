@@ -22,8 +22,6 @@ export default function TipInput(props) {
   return (
     <View style={styles.container}>
 
-      <Text style={{fontWeight: "bold", fontSize: 30, marginBottom: 35}} maxFontSizeMultiplier={2}>Tip Calculator</Text>
-
       {/* Input Bill Amount */}
       <Text style={styles.inputHeader}>Full Bill Amount: </Text>
 
@@ -86,7 +84,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     alignItems: 'center',
-    marginTop: 75,
+    marginTop: 55,
   },
   inputHeader: {
     paddingTop: 15,
@@ -98,6 +96,7 @@ const styles = StyleSheet.create({
     padding: 8,
     margin: 10,
     width: 200,
+    fontSize: 20
   }, 
   resetButton: {
     backgroundColor: "lightcoral",

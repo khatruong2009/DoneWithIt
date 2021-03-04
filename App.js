@@ -39,6 +39,8 @@ export default function App() {
       {/* main container */}
       <SafeAreaView style={styles.container}>
 
+        <Text style={{fontWeight: "bold", fontSize: 30, marginTop: 45}} maxFontSizeMultiplier={2}>Tip Calculator</Text>
+
         <TipInput appReset={appReset} calculate={handlePress} />  
         
         <TipOutput hidden={hidden} total={resultTotal} person={resultPerson} />
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     alignItems: 'center',
-    marginTop: 75,
+    marginTop: 55,
   },
   inputHeader: {
     paddingTop: 15,
